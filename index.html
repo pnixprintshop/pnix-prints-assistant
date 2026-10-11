@@ -1,431 +1,534 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100b16">
-<title>Gift Finder | Pnix Prints</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100B18">
+  <meta name="description" content="Find thoughtful, personalized gifts with Pnix Prints Assistant.">
+  <title>Pnix Prints Assistant | Find Their Perfect Gift</title>
 
-<style>
-:root {
-  --bg: #100b16;
-  --panel: #1d1625;
-  --panel2: #251b30;
-  --pink: #ff5f91;
-  --purple: #c77dff;
-  --aqua: #76f5e6;
-  --text: #fff8ff;
-  --muted: #c0b6ca;
-  --border: #493650;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at 15% 0%, #392044 0, transparent 40%),
-    radial-gradient(ellipse at 100% 35%, #102f35 0, transparent 32%),
-    var(--bg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  line-height: 1.6;
-}
-a { color: inherit; }
-header, main, footer {
-  width: min(100% - 32px, 760px);
-  margin-inline: auto;
-}
-header {
-  padding: 22px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-.logo {
-  font-size: 19px;
-  font-weight: 900;
-  letter-spacing: -.7px;
-}
-.logo span { color: var(--pink); }
-.logo small { color: var(--aqua); }
-.store-link {
-  text-decoration: none;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  border-radius: 14px;
-  padding: 9px 13px;
-  font-size: 13px;
-  font-weight: 800;
-}
-.hero {
-  text-align: center;
-  padding: 42px 0 26px;
-}
-.eyebrow {
-  display: inline-block;
-  padding: 5px 13px;
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  color: #ffb5d0;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-h1 {
-  font-size: clamp(34px, 8vw, 54px);
-  line-height: 1.08;
-  letter-spacing: -2px;
-  margin: 20px 0 15px;
-}
-.gradient {
-  background: linear-gradient(100deg, var(--pink),
-    var(--purple), var(--aqua));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.intro {
-  max-width: 490px;
-  margin: 0 auto;
-  color: var(--muted);
-  font-size: 15px;
-}
-.panel {
-  background: linear-gradient(145deg, #241a2d, #17131e);
-  border: 1px solid var(--border);
-  border-radius: 25px;
-  padding: 23px 19px;
-  box-shadow: 0 18px 60px #0003;
-}
-h2 { font-size: 23px; line-height: 1.3; margin: 0 0 8px; }
-.subtext { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
-label {
-  display: block;
-  font-weight: 750;
-  font-size: 14px;
-  margin: 17px 0 7px;
-}
-input, select {
-  width: 100%;
-  min-height: 52px;
-  border: 1px solid #57465f;
-  border-radius: 13px;
-  background: #110e17;
-  color: var(--text);
-  padding: 12px;
-  font: inherit;
-  font-size: 15px;
-}
-input:focus, select:focus, button:focus-visible, a:focus-visible {
-  outline: 2px solid var(--aqua);
-  outline-offset: 3px;
-}
-.primary {
-  width: 100%;
-  min-height: 56px;
-  margin-top: 23px;
-  border: 0;
-  border-radius: 14px;
-  color: #210d1a;
-  background: linear-gradient(100deg, var(--pink), #ff82b4);
-  font-size: 16px;
-  font-weight: 900;
-  cursor: pointer;
-}
-.primary:active { transform: scale(.99); }
-.note { color: var(--muted); font-size: 12px; margin: 15px 0 0; }
-#results { margin-top: 28px; }
-.results-heading { margin-bottom: 15px; }
-.product {
-  background: linear-gradient(145deg, #251b30, #17121d);
-  border: 1px solid var(--border);
-  border-radius: 19px;
-  padding: 19px;
-  margin: 14px 0;
-}
-.product-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-}
-.product-icon {
-  flex: 0 0 57px;
-  width: 57px;
-  height: 57px;
-  display: grid;
-  place-items: center;
-  border-radius: 16px;
-  font-size: 30px;
-  background: linear-gradient(140deg, #45254e, #183e43);
-}
-.product h3 { margin: 0 0 5px; font-size: 18px; line-height: 1.3; }
-.product p { margin: 5px 0; color: var(--muted); font-size: 13px; }
-.price { color: var(--aqua); font-size: 22px; font-weight: 900; margin-top: 12px; }
-.product-button {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 14px;
-  padding: 12px;
-  border-radius: 12px;
-  background: linear-gradient(100deg, var(--pink), #ff8ab9);
-  color: #210d1a;
-  font-weight: 900;
-}
-.secondary-button {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 12px;
-  padding: 11px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  font-weight: 750;
-}
-.section {
-  text-align: center;
-  padding: 34px 0;
-}
-.section p { color: var(--muted); font-size: 14px; }
-footer {
-  border-top: 1px solid var(--border);
-  padding: 22px 0 32px;
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
-}
-[hidden] { display: none !important; }
-@media (min-width: 600px) {
-  .panel { padding: 30px; }
-  .hero { padding-top: 58px; }
-}
-</style>
+  <style>
+    :root {
+      --bg: #100D16;
+      --panel: #1D1828;
+      --panel2: #15111E;
+      --pink: #FF5B98;
+      --purple: #C76BFF;
+      --blue: #91CFFF;
+      --aqua: #77F0DE;
+      --text: #FFFFFF;
+      --muted: #BEB7CC;
+      --border: #393044;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, #30203E 0%, transparent 48%),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(100% - 32px, 760px);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 900;
+      letter-spacing: -1px;
+      font-size: 20px;
+    }
+
+    .brand span {
+      background: linear-gradient(90deg, var(--purple), var(--pink), var(--aqua));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .store-link, .product-link {
+      text-decoration: none;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      font-weight: 800;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .store-link {
+      border: 1px solid var(--border);
+      background: #292333;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+
+    .store-link:hover, .product-link:hover {
+      transform: translateY(-2px);
+      opacity: .9;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 48px 0 28px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid #60405E;
+      color: #FFC3DE;
+      border-radius: 50px;
+      padding: 5px 13px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 8vw, 54px);
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin: 22px 0 14px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--purple), var(--pink), var(--aqua));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      margin: auto;
+      font-size: 16px;
+    }
+
+    .finder {
+      background: linear-gradient(145deg, #241D30, #18141F);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: clamp(20px, 5vw, 32px);
+      margin: 30px auto;
+      box-shadow: 0 20px 65px #0003;
+    }
+
+    h2 { margin: 0 0 5px; font-size: 25px; }
+
+    .subtext {
+      color: var(--muted);
+      margin: 0 0 24px;
+      font-size: 14px;
+    }
+
+    .field { margin-bottom: 19px; }
+
+    label {
+      display: block;
+      font-weight: 750;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    select, input {
+      display: block;
+      width: 100%;
+      min-height: 54px;
+      border: 1px solid #494052;
+      border-radius: 13px;
+      background: #110F17;
+      color: white;
+      padding: 12px 14px;
+      font-size: 16px;
+    }
+
+    select:focus, input:focus {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+    }
+
+    .discover {
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(100deg, var(--pink), #FF83B1);
+      color: #210B18;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      margin-top: 3px;
+    }
+
+    .discover:hover { filter: brightness(1.06); }
+
+    .fineprint {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 15px 0 0;
+    }
+
+    #results { scroll-margin-top: 20px; }
+
+    .results-heading {
+      margin: 38px 0 6px;
+      font-size: 27px;
+    }
+
+    .results-intro {
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .product {
+      min-width: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      padding: 18px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .product-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 29px;
+      background: linear-gradient(135deg, #54315D, #263D51);
+      margin-bottom: 12px;
+    }
+
+    .product h3 {
+      font-size: 17px;
+      line-height: 1.35;
+      margin: 0 0 7px;
+    }
+
+    .product p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 12px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--aqua);
+      margin: auto 0 13px;
+      padding-top: 8px;
+    }
+
+    .product-link {
+      width: 100%;
+      padding: 12px 8px;
+      background: linear-gradient(100deg, var(--purple), var(--pink));
+      color: #170C20;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .empty {
+      color: var(--muted);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .closing {
+      text-align: center;
+      padding: 45px 0;
+      color: var(--muted);
+    }
+
+    .closing strong { color: white; font-size: 22px; }
+
+    footer {
+      text-align: center;
+      padding: 22px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer a { color: var(--pink); }
+
+    @media (max-width: 420px) {
+      .container { width: min(100% - 24px, 760px); }
+      .brand { font-size: 17px; }
+      .store-link { padding: 9px 10px; }
+      .products { gap: 10px; }
+      .product { padding: 14px 11px; }
+      .product h3 { font-size: 15px; }
+      .product-link { font-size: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  <a class="logo" href="https://pnixprints.com"
-     style="text-decoration:none">
-    PNIX <span>PRINTS</span><small> ✦</small>
-  </a>
-  <a class="store-link" href="https://pnixprints.com">
-    Visit Store ↗
-  </a>
-</header>
-
-<main>
-  <section class="hero">
-    <span class="eyebrow">YOUR PERSONAL GIFT STUDIO ✨</span>
-    <h1>Make them feel<br><span class="gradient">extra special.</span></h1>
-    <p class="intro">
-      Not just another gift. Find something personal, thoughtful
-      and unforgettable with Pnix Prints.
-    </p>
-  </section>
-
-  <section class="panel">
-    <h2>🎁 Find their perfect gift</h2>
-    <p class="subtext">
-      Tell us a little about them. We'll suggest gifts to make their day.
-    </p>
-
-    <form id="giftForm">
-      <label for="recipient">Who is it for?</label>
-      <select id="recipient">
-        <option value="partner">Boyfriend / Girlfriend</option>
-        <option value="friend">Friend / Best Friend</option>
-        <option value="family">Family Member</option>
-        <option value="child">Child</option>
-        <option value="anyone">Someone Special</option>
-      </select>
-
-      <label for="occasion">Occasion</label>
-      <select id="occasion">
-        <option value="birthday">Birthday 🎂</option>
-        <option value="anniversary">Anniversary 💕</option>
-        <option value="love">Romantic Surprise ❤️</option>
-        <option value="friendship">Friendship 🫶</option>
-        <option value="justbecause">Just Because 🎁</option>
-      </select>
-
-      <label for="budget">Your budget</label>
-      <select id="budget">
-        <option value="300">Under ₹300</option>
-        <option value="500">₹300–₹500</option>
-        <option value="1000">₹500–₹1,000</option>
-        <option value="any">Any budget</option>
-      </select>
-
-      <label for="personality">Their personality</label>
-      <select id="personality">
-        <option value="romantic">Romantic & sentimental ❤️</option>
-        <option value="cute">Cute & playful 🐱</option>
-        <option value="thoughtful">Thoughtful & personal 💝</option>
-        <option value="fun">Fun-loving 🎉</option>
-      </select>
-
-      <label for="personName">Their name (optional)</label>
-      <input id="personName" type="text" maxlength="60"
-             placeholder="Enter their name">
-
-      <button class="primary" type="submit">
-        Discover Their Gifts ✨
-      </button>
-      <p class="note">Thoughtful ideas, made for meaningful moments.</p>
-    </form>
-  </section>
-
-  <section id="results" aria-live="polite" hidden>
-    <div class="results-heading">
-      <h2 id="resultTitle">Your gift ideas ✨</h2>
-      <p class="subtext" id="resultMessage"></p>
-    </div>
-    <div id="productList"></div>
-    <a class="secondary-button" href="https://pnixprints.com">
-      Explore All Gifts ↗
+  <header class="container">
+    <a class="brand" href="https://pnixprints.com"
+       aria-label="Pnix Prints home" style="text-decoration:none">
+      PNIX <span>PRINTS</span> ✦
     </a>
-  </section>
+    <a class="store-link" href="https://pnixprints.com" target="_blank"
+       rel="noopener noreferrer">Visit Store ↗</a>
+  </header>
 
-  <section class="section">
-    <h2>Small gifts. <span class="gradient">Big feelings. ❤️</span></h2>
-    <p>Turn your favourite memories into something special.</p>
-    <a class="secondary-button" href="https://pnixprints.com">
-      Shop Pnix Prints ↗
-    </a>
-  </section>
-</main>
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">YOUR PERSONAL GIFT STUDIO ✨</span>
+      <h1>Make them feel<br><span class="gradient-text">extra special.</span></h1>
+      <p>Not just another gift. Find something personal, thoughtful and
+         unforgettable with Pnix Prints.</p>
+    </section>
 
-<footer>
-  <div class="logo">PNIX <span>PRINTS</span> ✦</div>
-  Made with love for your most meaningful moments.
-</footer>
+    <section class="finder" aria-labelledby="finder-title">
+      <h2 id="finder-title">🎁 Find their perfect gift</h2>
+      <p class="subtext">Tell us a little about them. We'll suggest gifts
+        from our actual store.</p>
 
-<script>
-/*
-  Pnix Prints product catalogue.
-  Prices are in INR. Update them here whenever Shopify prices change.
-  Product links below use the URLs supplied by the store owner.
-*/
-const products = [
-  {
-    id: "love",
-    name: "Love Metal Card",
-    price: 299,
-    icon: "💗",
-    description: "A personalized keepsake for someone close to your heart.",
-    occasions: ["love", "anniversary"],
-    personalities: ["romantic", "thoughtful"],
-    recipients: ["partner"],
-    url: "https://www.pnixprints.com/products/love-card-pink-customize"
-  },
-  {
-    id: "cat",
-    name: "Cute Cats – Medium (6 Colors)",
-    price: 299,
-    icon: "🐱",
-    description: "A cute and cuddly surprise for someone who loves cats.",
-    occasions: ["birthday", "justbecause", "friendship"],
-    personalities: ["cute", "fun"],
-    recipients: ["friend", "family", "child", "anyone"],
-    url: "https://www.pnixprints.com/products/cute-cats-medium-6-colors"
-  },
-  {
-    id: "birthday",
-    name: "Birthday Metal Card",
-    price: 299,
-    icon: "🎂",
-    description: "Make their birthday feel personal with a custom card.",
-    occasions: ["birthday", "friendship", "justbecause"],
-    personalities: ["thoughtful", "fun", "romantic"],
-    recipients: ["partner", "friend", "family", "child", "anyone"],
-    url: "https://www.pnixprints.com/products/birthday-metal-card-customize"
-  }
-];
+      <form id="giftForm">
+        <div class="field">
+          <label for="recipient">Who is it for?</label>
+          <select id="recipient" name="recipient">
+            <option value="partner">Boyfriend / Girlfriend</option>
+            <option value="friend">Friend</option>
+            <option value="family">Family member</option>
+            <option value="anyone">Someone special</option>
+          </select>
+        </div>
 
-const form = document.getElementById("giftForm");
-const results = document.getElementById("results");
-const productList = document.getElementById("productList");
+        <div class="field">
+          <label for="occasion">Occasion</label>
+          <select id="occasion" name="occasion">
+            <option value="birthday">Birthday 🎂</option>
+            <option value="anniversary">Anniversary 💕</option>
+            <option value="love">Just because ❤️</option>
+            <option value="friendship">Friendship 🫶</option>
+            <option value="surprise">A little surprise 🎁</option>
+          </select>
+        </div>
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
+        <div class="field">
+          <label for="budget">Your budget</label>
+          <select id="budget" name="budget">
+            <option value="300">Under ₹300</option>
+            <option value="500">Under ₹500</option>
+            <option value="1000">Under ₹1,000</option>
+          </select>
+        </div>
 
-  const recipient = document.getElementById("recipient").value;
-  const occasion = document.getElementById("occasion").value;
-  const budget = document.getElementById("budget").value;
-  const personality = document.getElementById("personality").value;
-  const name = document.getElementById("personName").value.trim();
+        <div class="field">
+          <label for="personality">Their personality</label>
+          <select id="personality" name="personality">
+            <option value="romantic">Romantic & sentimental ❤️</option>
+            <option value="cute">Cute & playful 🐱</option>
+            <option value="fun">Fun-loving & cheerful 🎉</option>
+            <option value="thoughtful">Thoughtful & meaningful 💝</option>
+          </select>
+        </div>
 
-  const budgetLimit = budget === "any" ? Infinity : Number(budget);
+        <div class="field">
+          <label for="personName">Their name (optional)</label>
+          <input id="personName" name="personName" type="text"
+                 maxlength="60" placeholder="Enter their name"
+                 autocomplete="off">
+        </div>
 
-  const matches = products
-    .filter(product => product.price <= budgetLimit)
-    .map(product => {
-      let score = 0;
+        <button class="discover" type="submit">Discover Their Gifts ✨</button>
+      </form>
 
-      if (product.occasions.includes(occasion)) score += 4;
-      if (product.personalities.includes(personality)) score += 3;
-      if (product.recipients.includes(recipient)) score += 2;
+      <p class="fineprint">Thoughtful ideas, made for meaningful moments.</p>
+    </section>
 
-      // Help show suitable alternatives if a preference is not an exact match.
-      if (product.id === "birthday" && occasion === "birthday") score += 2;
-      if (product.id === "love" && recipient === "partner") score += 1;
-      if (product.id === "cat" && personality === "cute") score += 1;
+    <section id="results" aria-live="polite" aria-atomic="false">
+      <h2 class="results-heading">Small gifts. Big feelings. ❤️</h2>
+      <p class="results-intro">Choose your preferences above to discover a
+        gift with a direct link to its product page.</p>
+      <div id="productResults" class="products"></div>
+    </section>
 
-      return { ...product, score };
-    })
-    .sort((a, b) => b.score - a.score || a.price - b.price);
+    <section class="closing">
+      <strong>A little gift can mean a lot. 💖</strong>
+      <p>Make your favourite person smile with Pnix Prints.</p>
+      <a class="store-link" href="https://pnixprints.com"
+         target="_blank" rel="noopener noreferrer">Explore the Store ↗</a>
+    </section>
+  </main>
 
-  document.getElementById("resultTitle").textContent =
-    name ? "Gift ideas for " + name + " ✨" : "Your gift ideas ✨";
+  <footer class="container">
+    © <span id="year"></span> Pnix Prints Assistant ·
+    <a href="https://pnixprints.com">Shop Pnix Prints</a>
+  </footer>
 
-  document.getElementById("resultMessage").textContent =
-    matches.length
-      ? "Here are our picks for your occasion, personality and budget."
-      : "No products match that budget. Try choosing another budget.";
+  <script>
+    // PRODUCT CATALOG
+    // Product links below use only the URLs supplied by the store owner.
+    const products = [
+      {
+        id: "love-card",
+        name: "Metal Love Card – Customize",
+        price: 299,
+        icon: "💗",
+        description: "A personalized metal card to celebrate your special bond.",
+        url: "https://www.pnixprints.com/products/love-card-pink-customize",
+        occasions: ["love", "anniversary", "birthday", "surprise"],
+        personalities: ["romantic", "thoughtful"],
+        recipients: ["partner", "anyone"],
+        priority: 1
+      },
+      {
+        id: "cat-toy",
+        name: "Cute Cats – Medium, 6 Colors",
+        price: 299,
+        icon: "🐱",
+        description: "An adorable cat toy for someone who loves cute surprises.",
+        url: "https://www.pnixprints.com/products/cute-cats-medium-6-colors",
+        occasions: ["birthday", "surprise", "friendship", "love"],
+        personalities: ["cute", "fun"],
+        recipients: ["friend", "family", "partner", "anyone"],
+        priority: 2
+      },
+      {
+        id: "birthday-card",
+        name: "Birthday Metal Card – Customize",
+        price: 299,
+        icon: "🎂",
+        description: "A birthday keepsake made extra special with customization.",
+        url: "https://www.pnixprints.com/products/birthday-metal-card-customize",
+        occasions: ["birthday", "surprise"],
+        personalities: ["romantic", "thoughtful", "fun", "cute"],
+        recipients: ["partner", "friend", "family", "anyone"],
+        priority: 3
+      }
+    ];
 
-  productList.replaceChildren();
+    const form = document.getElementById("giftForm");
+    const results = document.getElementById("productResults");
+    const resultsSection = document.getElementById("results");
 
-  matches.forEach((product, index) => {
-    const card = document.createElement("article");
-    card.className = "product";
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    const top = document.createElement("div");
-    top.className = "product-top";
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, function (char) {
+        return {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char];
+      });
+    }
 
-    const icon = document.createElement("div");
-    icon.className = "product-icon";
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = product.icon;
+    function recommendGifts(preferences) {
+      return products
+        .filter(function (product) {
+          return product.price <= preferences.budget;
+        })
+        .map(function (product) {
+          let score = 0;
 
-    const info = document.createElement("div");
-    const heading = document.createElement("h3");
-    heading.textContent = product.name;
+          if (product.occasions.includes(preferences.occasion)) score += 5;
+          if (product.personalities.includes(preferences.personality)) score += 4;
+          if (product.recipients.includes(preferences.recipient)) score += 2;
 
-    const description = document.createElement("p");
-    description.textContent = product.description;
+          return { product: product, score: score };
+        })
+        .sort(function (a, b) {
+          return b.score - a.score ||
+                 a.product.priority - b.product.priority;
+        })
+        .map(function (item) {
+          return item.product;
+        });
+    }
 
-    const price = document.createElement("div");
-    price.className = "price";
-    price.textContent = "₹" + product.price;
+    function renderProducts(items, personName) {
+      const greeting = personName
+        ? "Gift ideas for " + escapeHTML(personName)
+        : "Your personalised gift ideas";
 
-    info.append(heading, description, price);
-    top.append(icon, info);
+      if (!items.length) {
+        results.innerHTML =
+          '<p class="empty">No products match this budget right now. ' +
+          'Please try a higher budget.</p>';
+        return;
+      }
 
-    const link = document.createElement("a");
-    link.className = "product-button";
-    link.href = product.url;
-    link.textContent = "Customize & Buy ↗";
+      results.innerHTML =
+        '<p class="results-intro" style="grid-column:1/-1">' +
+        greeting + '</p>' +
+        items.map(function (product) {
+          return '<article class="product">' +
+            '<div class="product-icon" aria-hidden="true">' +
+              product.icon + '</div>' +
+            '<h3>' + escapeHTML(product.name) + '</h3>' +
+            '<p>' + escapeHTML(product.description) + '</p>' +
+            '<div class="price">₹' + product.price + '</div>' +
+            '<a class="product-link" href="' +
+              product.url +
+              '" target="_blank" rel="noopener noreferrer">' +
+              'View Product ↗</a>' +
+            '</article>';
+        }).join("");
+    }
 
-    // Open the actual product page in the same tab.
-    card.append(top, link);
-    productList.append(card);
-  });
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-  results.hidden = false;
-  results.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-</script>
+      const preferences = {
+        recipient: document.getElementById("recipient").value,
+        occasion: document.getElementById("occasion").value,
+        budget: Number(document.getElementById("budget").value),
+        personality: document.getElementById("personality").value
+      };
+
+      const personName = document.getElementById("personName").value.trim();
+      const recommendations = recommendGifts(preferences);
+
+      renderProducts(recommendations, personName);
+      resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // Show actual products immediately, even before the form is submitted.
+    renderProducts(products, "");
+  </script>
 </body>
 </html>
