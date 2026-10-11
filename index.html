@@ -403,7 +403,7 @@
     const SHOPIFY_DOMAIN = "pnixprints.com";
 const STOREFRONT_TOKEN = "a4a1bd57402754d7a0c722e083d12a06";
 const STOREFRONT_API_VERSION = "2026-07";
-    const products = [
+    let products = [
       {
         id: "love-card",
         name: "Metal Love Card – Customize",
@@ -448,6 +448,76 @@ const STOREFRONT_API_VERSION = "2026-07";
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    async function loadShopifyProducts() {
+  const endpoint =
+    `https://${SHOPIFY_DOMAIN}/api/${STOREFRONT_API_VERSION}/graphql.json`;
+
+  const query = `
+    query {
+      products(first: 50) {
+        nodes {
+          handle
+          title
+          description
+          featuredImage {
+            url
+            altText
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": STOREFRONT_TOKEN
+      },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Shopify request failed: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.errors) {
+      throw new Error(result.errors[0].message);
+    }
+
+    const liveProducts = result.data.products.nodes;
+
+    products = products.map(product => {
+      const handle = product.url.split("/products/")[1]?.split(/[?#]/)[0];
+      const live = liveProducts.find(item => item.handle === handle);
+
+      if (!live) return product;
+
+      return {
+        ...product,
+        name: live.title,
+        description: live.description || product.description,
+        price: Number(live.priceRange.minVariantPrice.amount),
+        url: `https://${SHOPIFY_DOMAIN}/products/${live.handle}`,
+        image: live.featuredImage?.url || ""
+      };
+    });
+
+    renderProducts(products, "");
+    console.log("Shopify products loaded:", liveProducts.length);
+  } catch (error) {
+    console.error("Shopify connection error:", error);
+  }
+}
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, function (char) {
         return {
