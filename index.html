@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101014">
+<title>Pnix Prints | Gift Studio</title>
+<style>
+:root{--bg:#101014;--card:#1b1b23;--pink:#ff668b;--text:#fff;--muted:#b6b5c3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+header{padding:20px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30303a}
+.logo{font-weight:900;font-size:22px;letter-spacing:-1px}
+.logo span{color:var(--pink)}
+header a,.btn{color:white;text-decoration:none;background:#292933;border:1px solid #41414c;padding:10px 15px;border-radius:12px;font-weight:700}
+main{max-width:1000px;margin:auto;padding:36px 18px}
+.hero{text-align:center;padding:40px 10px 35px}
+.tag{color:#ff9bb2;font-size:12px;font-weight:800;letter-spacing:2px}
+h1{font-size:clamp(36px,8vw,66px);line-height:1.08;letter-spacing:-2px;margin:18px 0}
+h1 span{color:var(--pink)}
+.hero p{color:var(--muted);max-width:570px;margin:18px auto}
+.pill{display:inline-block;border:1px solid #46404b;border-radius:30px;padding:6px 13px;color:#f8c9d5;font-size:12px}
+.panel{background:linear-gradient(145deg,#24212c,#181820);border:1px solid #373441;border-radius:24px;padding:24px;margin:20px 0}
+h2{font-size:23px;margin:0 0 5px}
+.sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+label{display:block;font-size:14px;font-weight:700;margin:17px 0 8px}
+select,input,textarea{width:100%;padding:14px;border-radius:12px;border:1px solid #484653;background:#111117;color:white;font:inherit}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{font:inherit;cursor:pointer}
+.primary{width:100%;margin-top:22px;padding:15px;background:var(--pink);color:#201018;border:0;border-radius:13px;font-weight:900;font-size:16px}
+.primary:hover{filter:brightness(1.08)}
+.results{display:none}
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:18px}
+.product{background:#22212b;border:1px solid #41404b;padding:18px;border-radius:18px}
+.emoji{font-size:38px}
+.product h3{margin:7px 0;font-size:18px}
+.product p{color:var(--muted);font-size:13px}
+.price{font-weight:900;color:#ff9bb2}
+.product a{display:block;text-align:center;margin-top:12px;padding:10px;border-radius:10px;background:#ff668b;color:#201018;text-decoration:none;font-weight:800;font-size:13px}
+.message{background:#111117;padding:16px;border-radius:13px;border:1px solid #44404b;white-space:pre-wrap;margin-top:15px}
+.secondary{background:#30303b;border:1px solid #50505c;border-radius:10px;color:white;padding:10px 13px;margin-top:12px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 15px;border-top:1px solid #30303a}
+footer a{color:#ff9bb2}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
+@media(max-width:560px){.grid,.result-grid{grid-template-columns:1fr}.panel{padding:19px}main{padding:22px 14px}.hero{padding-top:28px}header{padding:15px 4%}.logo{font-size:19px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">PNIX <span>PRINTS</span> ✦</div>
+  <a href="https://pnixprints.com">Visit Store ↗</a>
+</header>
+<main>
+<section class="hero">
+  <span class="pill">YOUR PERSONAL GIFT STUDIO ✨</span>
+  <h1>Make them feel<br><span>extra special.</span></h1>
+  <p>Not just another gift. Find something personal, thoughtful and unforgettable with Pnix Prints.</p>
+</section>
+
+<section class="panel">
+  <h2>🎁 Find their perfect gift</h2>
+  <p class="sub">Tell us a little about them. We'll suggest ideas to make their day.</p>
+  <form id="giftForm">
+    <div class="grid">
+      <div>
+        <label for="recipient">Who is it for?</label>
+        <select id="recipient">
+          <option value="partner">Boyfriend / Girlfriend</option>
+          <option value="friend">Best friend</option>
+          <option value="family">Family member</option>
+          <option value="spouse">Husband / Wife</option>
+          <option value="other">Someone special</option>
+        </select>
+      </div>
+      <div>
+        <label for="occasion">Occasion</label>
+        <select id="occasion">
+          <option value="birthday">Birthday 🎂</option>
+          <option value="anniversary">Anniversary ❤️</option>
+          <option value="love">Just because 💕</option>
+          <option value="friendship">Friendship 🫶</option>
+          <option value="wedding">Wedding 💍</option>
+          <option value="other">Surprise gift 🎁</option>
+        </select>
+      </div>
+    </div>
+    <label for="budget">Your budget</label>
+    <select id="budget">
+      <option value="299">Under ₹300</option>
+      <option value="500">Under ₹500</option>
+      <option value="1000">Under ₹1,000</option>
+      <option value="2000">Under ₹2,000</option>
+    </select>
+    <label for="style">Their personality</label>
+    <select id="style">
+      <option value="romantic">Romantic & sentimental ❤️</option>
+      <option value="cute">Cute & playful 🐱</option>
+      <option value="creative">Creative & artistic 🎨</option>
+      <option value="simple">Simple & thoughtful ✨</option>
+    </select>
+    <label for="name">Their name (optional)</label>
+    <input id="name" maxlength="40" placeholder="Enter their name">
+    <button class="primary" type="submit">Discover Their Gifts ✨</button>
+    <p class="note">Thoughtful ideas, made for meaningful moments.</p>
+  </form>
+</section>
+
+<section class="panel results" id="results" aria-live="polite">
+  <h2 id="resultTitle">Your gift shortlist ✨</h2>
+  <p class="sub" id="resultSubtitle"></p>
+  <div class="result-grid" id="productList"></div>
+  <h2 style="margin-top:28px">💌 A message from the heart</h2>
+  <p class="sub">A personalised message idea for their special moment.</p>
+  <div class="message" id="message"></div>
+  <button class="secondary" id="copyMessage" type="button">Copy Gift Message</button>
+  <p class="note">Gift suggestions are a demo and may not reflect live stock or final delivery costs. Check the store for current prices and availability.</p>
+</section>
+
+<section style="text-align:center;padding:24px 0">
+  <h2>Small gifts. Big feelings. ❤️</h2>
+  <p class="sub">Turn your favourite memories into something they can keep.</p>
+  <a class="btn" href="https://pnixprints.com">Explore Pnix Prints →</a>
+</section>
+</main>
+<footer>
+  <strong>PNIX PRINT SHOP</strong><br>
+  Made for your most meaningful moments.<br>
+  <a href="https://pnixprints.com">pnixprints.com</a>
+</footer>
+<script>
+const products = [
+ {id:"metal-love",name:"Personalised Love Metal Card",emoji:"💖",price:299,desc:"A memorable keepsake for your favourite person.",types:["partner","spouse"],styles:["romantic","simple"],occasions:["love","anniversary","birthday"]},
+ {id:"metal-birthday",name:"Birthday Metal Card",emoji:"🎂",price:299,desc:"Make their birthday personal with a special design.",types:["friend","family","other"],styles:["creative","simple"],occasions:["birthday"]},
+ {id:"photo-print",name:"Custom Photo Metal Print",emoji:"🖼️",price:399,desc:"Turn a favourite memory into a lasting display.",types:["partner","friend","family","spouse","other"],styles:["romantic","creative","simple"],occasions:["love","anniversary","friendship","wedding","birthday","other"]},
+ {id:"polaroids",name:"Personalised Photo Prints",emoji:"📸",price:199,desc:"A little collection of moments worth keeping.",types:["partner","friend","family","spouse","other"],styles:["romantic","creative","cute"],occasions:["love","anniversary","friendship","birthday","other"]},
+ {id:"cat-toy",name:"Cute Cat Toy",emoji:"🐱",price:299,desc:"A playful surprise for someone who loves cute things.",types:["friend","other"],styles:["cute"],occasions:["birthday","friendship","other"]},
+ {id:"gift-message",name:"Personalised Gift Surprise",emoji:"🎁",price:249,desc:"A thoughtful little surprise for someone special.",types:["partner","friend","family","spouse","other"],styles:["romantic","cute","creative","simple"],occasions:["love","anniversary","friendship","wedding","birthday","other"]}
+];
+const form=document.getElementById("giftForm");
+form.addEventListener("submit",function(e){
+ e.preventDefault();
+ const recipient=document.getElementById("recipient").value;
+ const occasion=document.getElementById("occasion").value;
+ const budget=Number(document.getElementById("budget").value);
+ const style=document.getElementById("style").value;
+ const name=document.getElementById("name").value.trim();
+ let matches=products.filter(p=>p.price<=budget);
+ matches.sort((a,b)=>{
+  const score=p=>(p.types.includes(recipient)?3:0)+(p.styles.includes(style)?3:0)+(p.occasions.includes(occasion)?4:0);
+  return score(b)-score(a);
+ });
+ matches=matches.slice(0,4);
+ document.getElementById("resultTitle").textContent=name?`Gift ideas for ${name} ✨`:"Your gift shortlist ✨";
+ document.getElementById("resultSubtitle").textContent=`Ideas for ${occasion==="love"?"a little surprise":occasion}, with a budget up to ₹${budget}.`;
+ document.getElementById("productList").innerHTML=matches.map(p=>`
+ <article class="product">
+ <div class="emoji">${p.emoji}</div><h3>${p.name}</h3>
+ <p>${p.desc}</p><div class="price">From ₹${p.price}</div>
+ <a href="https://pnixprints.com" target="_blank" rel="noopener">Explore at Pnix Prints ↗</a>
+ </article>`).join("");
+ const messages={
+ partner:`Every moment with you becomes a memory I want to keep forever. ${occasion==="birthday"?"Happy Birthday!":"You make ordinary days feel extraordinary."} ❤️`,
+ friend:`Life is better with a friend like you. Thank you for all the laughs, memories and little moments. ${occasion==="birthday"?"Happy Birthday!":"Here's to many more memories together!"} 🫶`,
+ family:`Some of life's best gifts are the people we love. Thank you for being such a special part of my life. Sending you lots of love! ❤️`,
+ spouse:`My favourite place will always be by your side. Thank you for making life beautiful in a thousand little ways. I love you, always. ❤️`,
+ other:`You deserve a little reminder of how special you are. I hope this gift brings a smile to your face and warmth to your heart. ✨`
+ };
+ document.getElementById("message").textContent=(name?name+", ":"")+messages[recipient];
+ const section=document.getElementById("results");
+ section.style.display="block";
+ section.scrollIntoView({behavior:"smooth",block:"start"});
+});
+document.getElementById("copyMessage").addEventListener("click",async function(){
+ const text=document.getElementById("message").textContent;
+ try{
+  await navigator.clipboard.writeText(text);
+  this.textContent="Copied! ✓";
+ }catch(e){
+  const area=document.createElement("textarea");
+  area.value=text;document.body.appendChild(area);area.select();
+  document.execCommand("copy");area.remove();
+  this.textContent="Copied! ✓";
+ }
+});
+</script>
+</body>
+</html>
